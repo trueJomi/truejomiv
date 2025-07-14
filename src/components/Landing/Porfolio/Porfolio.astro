@@ -1,0 +1,28 @@
+---
+import type { Projects, Skills } from "@/types/cv.type";
+import LandingSecction from "../../utils/LandingSecction.astro";
+import Title from "../../utils/Title.astro";
+import CardProyect from "./CardProyect.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+interface Props {
+    porfolio: Projects[]
+    skills: Skills[]
+}
+
+const { porfolio, skills } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang)
+---
+
+<LandingSecction id="projects" class=" font-hurley text-main-0">
+  <Title>
+    {t("projects.title")}
+  </Title>
+  <ul class="grid lg:grid-cols-2 gap-2  justify-center xl:grid-cols-3" >
+    {porfolio.map((project) => (
+      <li class="w-full">
+          <CardProyect data={project} skills={skills} />
+      </li>
+    ))}
+  </ul>
+</LandingSecction>

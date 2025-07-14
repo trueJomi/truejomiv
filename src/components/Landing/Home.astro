@@ -1,0 +1,118 @@
+---
+import {
+  useTranslations,
+  getLangFromUrl,
+  useTranslatedPath,
+} from "@/i18n/utils";
+import { Image } from "astro:assets";
+import LandingSecction from "../utils/LandingSecction.astro";
+import type { Basics } from "@/types/cv.type";
+import GitHub from "@/assets/icons/GitHub.astro";
+import LinkedIn from "@/assets/icons/LinkedIn.astro";
+import X from "@/assets/icons/X.astro";
+import type { SocialIcon } from "@/types/SocialIcons.type";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+interface Props {
+  basics: Basics;
+}
+const { basics }: Props = Astro.props;
+
+const SOCIAL_ICONS: SocialIcon = {
+  GitHub,
+  LinkedIn,
+  X,
+}
+---
+
+<LandingSecction
+  class="flex flex-col items-center sm:flex-row justify-center sm:justify-self-auto md:justify-start sm:items-center"
+  id="home"
+>
+  <picture class="md:hidden">
+    <Image
+      src="/favicon.svg"
+      alt="imagen"
+      width={100}
+      height={100}
+      class="aspect-square w-full max-w-60"
+    />
+  </picture>
+  <div class="col-span-2 md:col-span-1">
+    <h1
+      class="text-5xl/12 text-center sm:text-start md:text-7xl font-hurley font-bold tracking-tighter mb-3 uppercase"
+    >
+      <span class="text-white">Jose Miguel</span>
+      <span class="text-secondary">Vasquez Trujillo</span>
+    </h1>
+    <p class="md:text-xl text-tertiary font-hurley mb-4 text-center sm:text-start" >
+      {t("home.welcome.job")} <span id="strings"></span>
+    </p>
+    <h2 class="text-lg font-hurley text-white mb-2 md:mb-3 uppercase md:text-2xl text-center sm:text-start">
+      {t("home.welcome")}
+    </h2>
+    <p class="mb-5 font-medium font-mono text-gray-300 text-sm md:text-lg text-center sm:text-start">
+      {t("home.contact")}
+      <a
+        href={`mailto:${basics.email}`}
+        class="hover:underline text-secondary font-bold hover:text-tertiary duration-200">{basics.email}</a
+      >
+    </p>
+    <dir class=" sm:flex sm:items-center gap-6" >
+      <div class=" flex justify-center sm:justify-start ">
+        <a
+          class="px-4 py-2 bg-secondary font-mono font-bold uppercase text-main-400 rounded-2xl md:text-2xl text-center hover:-translate-y-1 duration-200"
+          href={translatePath("/cv")}
+        >
+          {t("home.contact.button.cv")}
+        </a>
+      </div>
+      <div>
+        <ul class="flex justify-center sm:justify-start gap-3 mt-6 sm:mt-0">
+          {
+            basics.profiles.map(({ network, url, username }) => {
+              const Icon = SOCIAL_ICONS[network]
+  
+              return (
+                <a
+                  href={url}
+                  title={`Visitar el perfil de ${basics.name} en ${network}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button class=" bg-tertiary rounded-full h-10 hover:scale-125 duration-200 aspect-square p-2 text-main-400" >
+                    <Icon />
+                  </button>
+                </a>
+              )
+            })
+          }
+        </ul>
+      </div>
+    </dir>
+  </div>
+</LandingSecction>
+<script>
+  import Typed from "typed.js"
+  document.addEventListener("astro:page-load", () => {
+    const strins = new Typed("#strings", {
+      strings: [
+        "<span class='text-secondary'>fullstack web</span>",
+        "frontend",
+        "backend",
+        "microservices",
+        "cloud",
+      ],
+      loop: true,
+      backDelay: 1000,
+      backSpeed: 40,
+      typeSpeed: 50,
+    })
+  
+    return () => {
+      strins.destroy();
+    }
+  });
+</script>

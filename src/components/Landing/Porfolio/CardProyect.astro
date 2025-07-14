@@ -1,0 +1,66 @@
+---
+import type { Projects, Skills } from "@/types/cv.type";
+import { Image } from "astro:assets";
+import { adaptativeColor } from "@/libs/color"
+import { SKILLS_ICONS } from "@/const/skills";
+
+interface Props {
+  data: Projects;
+  skills: Skills[];
+}
+
+const { data, skills }: Props = Astro.props;
+---
+
+<div
+  class="font-hurley bg-main text-white p-4 rounded-md min-h-120 w-full flex flex-col justify-between gap-2 border-main-50 border-2 max-w-md"
+>
+  <div>
+    <picture>
+      <Image
+        src={data.image}
+        alt={data.name}
+        class="w-full h-48 object-cover rounded-md mb-4 bg-white"
+        loading="lazy"
+        width={400}
+        height={300}
+      />
+    </picture>
+    <h1 class="text-2xl font-bold text-secondary mb-2">
+      {data.name}
+    </h1>
+    <p title={data.description} class="text-white font-mono font-bold line-clamp-3">
+      {data.description}
+    </p>
+    <ul class="flex flex-wrap gap-2 gap-y-1">
+      {
+        data.tecnologies.map((tech) => {
+          const skill = skills.find((s) => s.icon === tech);
+        if (!skill) return null;
+          return (
+            <li class={`text-main-500 text-xs md:text-sm mt-1 font-bold items-center font-mono flex gap-1 px-2 py-1 rounded-xs`} style={`background-color: ${skill.bgColor}; color: ${adaptativeColor(skill.bgColor)};`}>
+              <Image src={SKILLS_ICONS[skill.icon]} width={16} height={16} class="max-w-3 md:max-w-4 max-h-3 md:max-h-4 h-full w-full" alt={skill.name} />
+              <span class="font-semibold">{skill.name}</span>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+  <div class="grid grid-cols-2 gap-1 text-sm md:text-base">
+    <a class="col-span-1" href="">
+      <button
+        class="font-mono bg-tertiary text-main-200 px-4 py-2 rounded-lg hover:bg-secondary transition-colors w-full border-2 font-bold uppercase"
+      >
+        Ver Proyecto
+      </button>
+    </a>
+    <a class="col-span-1" href="">
+      <button
+        class="font-mono bg-main-500 text-white px-4 py-2 rounded-lg w-full hover:bg-main-600 border-2 border-transparent hover:border-main-400 transition-colors font-bold uppercase"
+      >
+        Ver Repositorio
+      </button>
+    </a>
+  </div>
+</div>

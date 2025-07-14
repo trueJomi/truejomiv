@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: Hurley-Sans;
+  font-style: normal;
+  font-weight: 400;
+  src: url("/Hurley-1967-Sans.woff2") format("woff2");
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@theme {
+  --color-main: #483aa0;
+  --color-main-0: #8A7FCD;
+  --color-main-50: #6255B1;
+  --color-main-200: #30218C;
+  --color-main-400: #20136F;
+  --color-secondary: #E7DF3E;
+  --color-secondary-0: #FFFA90;
+  --color-secondary-50: #FFF866;
+  --color-secondary-200: #CAC319;
+  --color-secondary-400: #A09A08;
+  --color-tertiary: #E7A63E;
+  --font-hurley: Hurley-Sans, sans-serif;
+}

@@ -1,0 +1,16 @@
+---
+import LayoutLanding from "@/layout/LayoutLanding.astro";
+import { getCV } from "../../services/cv.service";
+import Home from "../../components/Landing/Home.astro";
+import AboutMe from "../../components/Landing/AboutMe.astro";
+import HeaderLanding from "../../layout/HeaderLanding.astro";
+
+const data = await getCV("es")
+---
+<LayoutLanding>
+	<HeaderLanding/>
+    <main class="w-full h-full md:pl-60">
+        <Home basics={data.basics} />
+        <AboutMe sumary={data.basics.summary}/>
+    </main>
+</LayoutLanding>

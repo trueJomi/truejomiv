@@ -1,0 +1,89 @@
+---
+import HTML from "@/assets/icons/html.astro"
+import CSS from "@/assets/icons/css.astro"
+import JavaScript from "@/assets/icons/javascript.astro"
+import TypeScript from "@/assets/icons/type.astro"
+import React from "@/assets/icons/react.astro"
+import Node from "@/assets/icons/node.astro"
+import MySQL from "@/assets/icons/sql.astro"
+import Git from "@/assets/icons/git.astro"
+import GitHub from "@/assets/icons/GitHub.astro"
+import Tailwind from "@/assets/icons/tailwind.astro"
+import Next from "@/assets/icons/next.astro"
+import Swift from "@/assets/icons/swift.astro"
+import SwiftUI from "@/assets/icons/swiftui.astro"
+import Kotlin from "@/assets/icons/kotlin.astro"
+import Flutter from "@/assets/icons/flutter.astro"
+import Postgre from "@/assets/icons/Postgre.astro"
+import Section from "../utils/Section.astro"
+import Docker from "@/assets/icons/Docker.astro"
+import GoogleCloud from "@/assets/icons/GoogleCloud.astro"
+import type { Skills } from "@/types/cv.type"
+
+const SKILLS_ICONS: Record<string, any> = {
+  html: HTML,
+  css: CSS,
+  javascript: JavaScript,
+  typescript: TypeScript,
+  react: React,
+  node: Node,
+  mysql: MySQL,
+  git: Git,
+  github: GitHub,
+  next: Next,
+  tailwind :Tailwind,
+  swift: Swift,
+  swiftui: SwiftUI,
+  kotlin: Kotlin,
+  flutter: Flutter,
+  postgresql: Postgre,
+  docker: Docker,
+  googleCloud: GoogleCloud
+}
+
+interface Props {
+  skills: Skills[]
+}
+
+const { skills } = Astro.props;
+---
+
+<Section title="Habilidades">
+  <ul>
+    {
+      skills.map(({ name, icon }) => {
+        const Icon = SKILLS_ICONS[icon ?? name]
+
+        return (
+          <li>
+            {Icon && <div><Icon /></div>} <span>{name}</span>
+          </li>
+        )
+      })
+    }
+  </ul>
+</Sectio>
+
+<style>
+  ul {
+    display: inline-flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  li {
+    align-items: center;
+    background: #eee;
+    border-radius: 6px;
+    color: black;
+    display: flex;
+    font-size: 0.8rem;
+    font-weight: 500;
+    gap: 4px;
+    padding: 0.2rem 0.6rem;
+  }
+  li > div {
+    height: 16px;
+    width: 16px;
+  }
+</style>

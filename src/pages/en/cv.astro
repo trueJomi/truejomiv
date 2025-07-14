@@ -1,0 +1,50 @@
+---
+import Keyboard from "@/components/utils/KeyboardCV.astro";
+import About from "../../components/CV/About.astro";
+import Experience from "../../components/CV/Experience.astro";
+import Hero from "../../components/CV/Hero.astro";
+import Projects from "../../components/CV/Projects.astro";
+import Skills from "../../components/CV/Skills.astro";
+import LayoutCV from "../../layout/LayoutCV.astro";
+import { getCV } from "../../services/cv.service";
+
+const data = await getCV("en")
+
+---
+
+<LayoutCV
+    title="Curriculum Vitae"
+    image={data.basics.image}
+    summary="Curriculum Vitae of a professional from"
+    url="https://truejomiv.com/cv"
+>
+    <main>
+        <Hero
+            name={data.basics.name}
+            label={data.basics.label}
+            image={data.basics.image}
+            location={data.basics.location}
+            profiles={data.basics.profiles}
+            phone={data.basics.phone}
+            email={data.basics.email}
+        />
+        <About summary={data.basics.summary} />
+        <Experience work={data.work} />
+        <Projects projects={data.projects} />
+        <Skills skills={data.skills} />
+    </main>
+    <Keyboard profiles={data.basics.profiles} />
+</LayoutCV>
+<style>
+  .main {
+    padding: 4rem;
+    margin: auto;
+    width: 100%;
+  }
+
+  @media (width <= 700px) {
+    .main {
+      padding: 2rem;
+    }
+  }
+</style>

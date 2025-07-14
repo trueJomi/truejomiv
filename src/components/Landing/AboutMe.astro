@@ -1,0 +1,46 @@
+---
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import LandingSecction from "../utils/LandingSecction.astro";
+import type { Basics } from "@/types/cv.type";
+import Title from "../utils/Title.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+interface Props {
+  basics: Basics;
+}
+const { summary, workingStatus, job, email } = Astro.props.basics;
+---
+
+<LandingSecction id="about" class="text-white font-hurley flex flex-col justify-center">
+  <Title>
+    {t("about.title")}
+  </Title>
+  <p class="text-lg sm:text-2xl text-pretty font-mono font-bold">{summary}</p>
+  <p class="text-lg sm:text-3xl text-tertiary py-4">
+    {
+      !workingStatus ? (
+        t("about.lookingForJob")
+      ) : (
+        <>
+          {t("about.notLookingForJob")}
+          <span>{job}</span>
+        </>
+      )
+    }
+  </p>
+  <p class="sm:text-xl font-mono font-bold">
+    {t("about.contact")}
+    <a
+      class="text-secondary hover:text-tertiary font-black duration-200 hover:underline"
+      href="">{email}</a
+    >
+  </p>
+  <p class="sm:text-xl font-mono font-bold">
+    {t("about.linkedin")}
+    <a
+      class="text-secondary hover:text-tertiary font-black duration-200 hover:underline"
+      href="">linkedIn</a
+    >
+  </p>
+</LandingSecction>
