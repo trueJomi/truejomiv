@@ -1,0 +1,30 @@
+---
+import type { Skills } from "@/types/cv.type";
+import { Image } from "astro:assets";
+import { SKILLS_ICONS } from "@/const/skills";
+import { adaptativeColor } from "@/libs/color";
+interface Props {
+  skill: Skills;
+}
+const { skill } = Astro.props;
+---
+
+<li class="text-main-500 font-bold min-w-5">
+  <div class="flex justify-center" >
+    <div
+      class="rounded-full w-12 p-3 h-12 flex items-center justify-center"
+      style={`background-color: ${skill.bgColor}; color: ${adaptativeColor(skill.bgColor)};`}
+    >
+      <Image
+        src={SKILLS_ICONS[skill.icon]}
+        width={16}
+        height={16}
+        class="max-w-5 md:max-w-7 max-h-6 md:max-h-7 h-full w-full"
+        alt={skill.name}
+      />
+    </div>
+  </div>
+  <p class="text-center font-roboto-mono md:text-xl  text-white">
+    {skill.name}
+  </p>
+</li>

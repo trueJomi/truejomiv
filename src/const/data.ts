@@ -7,7 +7,7 @@ export const cv: CV = {
     shareImage: "https://res.cloudinary.com/deghyfe80/image/upload/c_fill,ar_1:1,g_auto/v1751755173/IMG_20211007_135703_2_dyf8p9.jpg",
     image: "https://res.cloudinary.com/deghyfe80/image/upload/c_fill,ar_1:1,g_auto/v1751755173/IMG_20211007_135703_2_dyf8p9.jpg",
     email: "truejomiv@gmail.com",
-    phone: "+51 924 098 405",
+    phone: "+51924098405",
     workingStatus: false,
     job: "Desarrollador Full Stack",
     url: "https://truejomi.com",
@@ -33,30 +33,30 @@ export const cv: CV = {
       {
         network: "X",
         username: "@truejomiv",
-        url: "https://twitter.com/truejomiv"
+        url: "https://x.com/truejomi"
       }
     ]
   },
   work: [
     {
-      name: "TechSolutions S.L.",
+      name: "Awanta S.A.",
       position: "Senior Full Stack Developer",
-      url: "https://techsolutions.com",
-      startDate: "2022-03-01",
-      endDate: null,
-      summary: "Desarrollo y mantenimiento de aplicaciones web empresariales utilizando React, Node.js y AWS.",
+      url: "https://app.awanta.app",
+      startDate: "2022-05-15",
+      endDate: "2023-08-18",
+      summary: "Desarrollo de aplicaciones web  utilizando tecnologías modernas como React, Node.js y google Cloud",
       highlights: [
-        "Lideré el desarrollo de una plataforma de e-commerce que aumentó las ventas en un 40%",
+        "Lideré el desarrollo de una plataforma de gestión de gastos perosnales con ",
         "Implementé arquitectura de microservicios que mejoró la escalabilidad del sistema",
         "Mentoré a 3 desarrolladores junior en mejores prácticas de desarrollo"
       ]
     },
     {
-      name: "Startup Innovadora",
+      name: "Kubu.so",
       position: "Full Stack Developer",
-      url: "https://startup.com",
-      startDate: "2020-01-15",
-      endDate: "2022-02-28",
+      url: "https://kubu.so",
+      startDate: "2023-09-30",
+      endDate: "2024-02-20",
       summary: "Desarrollo de MVP y funcionalidades core de la plataforma principal de la startup.",
       highlights: [
         "Desarrollé la primera versión de la aplicación móvil con React Native",
@@ -124,6 +124,12 @@ export const cv: CV = {
       date: "2022-08-10",
       issuer: "Meta",
       url: "https://developers.facebook.com/certificate/"
+    },
+    {
+      name: "Road to Code 1.5",
+      date: "2023-01-20",
+      issuer: "Platzi",
+      url: "https://platzi.com/certificates/road-to-code-1.5"
     }
   ],
   publications: [
@@ -156,7 +162,7 @@ export const cv: CV = {
       name: "JavaScript",
       icon: "javascript",
       type: "frontend",
-      bgColor: "#F7DF1E",
+      bgColor: "#000000",
       level: "Intermedio",
       keywords: ["AWS", "Docker", "Kubernetes", "CI/CD", "GitHub Actions", "Terraform"]
     },
@@ -337,14 +343,6 @@ export const cv: CV = {
       keywords: ["GitHub", "Version Control", "CI/CD", "Open Source"]
     },
     {
-      name: "GitHub",
-      icon: "github",
-      type: "version control",
-      bgColor: "#181717",
-      level: "Avanzado",
-      keywords: ["GitHub", "Version Control", "CI/CD", "Open Source"]
-    },
-    {
       name: "Sheets",
       icon: "googleSheets",
       type: "integration",
@@ -395,6 +393,7 @@ export const cv: CV = {
     {
       name: "E-commerce Platform",
       isActive: true,
+      public: true,
       description: "Plataforma de comercio electrónico completa con panel de administración, sistema de pagos y analytics en tiempo real.",
       image: "https://res.cloudinary.com/deghyfe80/image/upload/v1751755173/ecommerce_platform.jpg",
       highlights: [
@@ -410,6 +409,7 @@ export const cv: CV = {
     {
       name: "Task Management App",
       isActive: true,
+      public: true,
       description: "Aplicación de gestión de tareas con colaboración en tiempo real, calendario integrado y notificaciones push.",
       image: "https://res.cloudinary.com/deghyfe80/image/upload/v1751755173/task_management_app.jpg",
       highlights: [
@@ -425,6 +425,7 @@ export const cv: CV = {
     {
       name: "Weather API",
       isActive: false,
+      public: false,
       description: "API REST para datos meteorológicos con predicciones y alertas automáticas.",
       image: "https://res.cloudinary.com/deghyfe80/image/upload/v1751755173/weather_api.jpg",
       highlights: [

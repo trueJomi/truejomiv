@@ -1,3 +1,13 @@
-<h1 class="text-4xl text-secondary sm:text-6xl mb-5 font-hurley">
+---
+interface Props {
+  class?: string;
+}
+const { class: className }: Props = Astro.props;
+---
+
+<h1 class:list={[
+    "text-4xl text-secondary sm:text-6xl mb-5 font-roboto-mono uppercase font-bold",
+    className
+]}>
     <slot/>
 </h1>

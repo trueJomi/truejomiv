@@ -45,7 +45,7 @@ const routes: Route[] = [
 ---
 
 <button
-  class="menu-button text-main-0 hover:text-main w-10 h-10 fixed p-2 pt-1.5 md:hidden hover:bg-secondary border-main-0 border-2 rounded-xl top-5 right-5 duration-300"
+  class="menu-button text-main-0 hover:text-main w-10 h-10 fixed p-2 pt-1.5 md:hidden hover:bg-secondary border-main-0 border-2 rounded-xl top-5 right-5 duration-300 bg-main-400"
 >
   <Bars />
 </button>
@@ -59,7 +59,7 @@ const routes: Route[] = [
     >
       <XIcon />
     </button>
-    <ul class="grid gap-3 font-hurley text-center z-50">
+    <ul class="grid gap-3 font-roboto-mono text-center z-50">
       <li class="mx-auto hidden md:block">
         <picture>
           <Image
@@ -76,7 +76,7 @@ const routes: Route[] = [
           <li class="w-full text-center">
             <a
               href={route.path}
-              class="text-main-0 md:text-base text-xl hover:text-secondary duration-200"
+              class="text-main-0 md:text-base text-xl hover:text-secondary duration-200 font-roboto-mono uppercase font-black"
             >
               {route.name}
             </a>

@@ -1,0 +1,22 @@
+---
+import type { Certificates } from '@/types/cv.type';
+
+interface Props {
+  cretificados: Certificates;
+}
+
+const { cretificados } = Astro.props;
+---
+<div>
+    <h3 class="text-2xl font-bold mb-2 text-tertiary font-roboto-mono">
+        {cretificados.name}
+    </h3>
+    <p class="text-lg font-bold text-white">
+        {cretificados.date} - {cretificados.issuer}
+    </p>
+    {cretificados.url && (
+        <a href={cretificados.url} class="mt-5 inline-block bg-secondary text-main-400 px-2 py-1 rounded uppercase font-mono hover:bg-tertiary transition-colors duration-200 font-bold">
+            ver certificado
+        </a>
+    )}
+</div>

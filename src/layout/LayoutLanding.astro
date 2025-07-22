@@ -6,8 +6,8 @@ interface Props {
 }
 
 const { class: className } = Astro.props;
-
 ---
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -30,7 +30,13 @@ const { class: className } = Astro.props;
     <meta name="twitter:title" content="Jose Miguel Vasquez" />
     <meta name="twitter:description" content="" />
     <meta name="twitter:image" content="" />
-    <ClientRouter/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Teko:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <ClientRouter />
   </head>
   <body class:list={[className, "relative dark:bg-main-400"]}>
     <slot />

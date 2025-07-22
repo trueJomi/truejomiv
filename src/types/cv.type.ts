@@ -134,6 +134,7 @@ export interface Projects {
   isActive: boolean
   description: string
   highlights: Highlight
+  public: boolean
   image: string
   url: string
   github?: string

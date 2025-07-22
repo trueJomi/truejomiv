@@ -24,6 +24,14 @@ export const ui = {
     'about.contact': 'Si quieres ponerte en contacto conmigo escribeme a ',
     'about.linkedin': 'Mira mi experiencia en detalle en',
     'projects.title': 'Portafolio',
+    'education.title': 'Educación',
+    'skills.title': 'Habilidades',
+    'skills.frontend': 'Frontend',
+    'skills.backend': 'Backend',
+    'skills.database': 'Base de datos',
+    'skills.frameworks': 'Frameworks',
+    'skills.mobile': 'Móvil',
+    'skills.tecnologies': 'Tecnologías',
    },
    en: {
     'nav.home': 'Jose Miguel',
@@ -42,5 +50,13 @@ export const ui = {
     'about.contact': 'If you want to contact me, write me at ',
     'about.linkedin': 'See my experience in detail at',
     'projects.title': 'Portfolio',
+    'education.title': 'Education',
+    'skills.title': 'Skills',
+    'skills.frontend': 'Frontend',
+    'skills.backend': 'Backend',
+    'skills.database': 'Database',
+    'skills.frameworks': 'Frameworks',
+    'skills.mobile': 'Mobile',
+    'skills.tecnologies': 'Technologies', 
    }
 } as const;

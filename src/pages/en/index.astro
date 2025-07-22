@@ -1,16 +1,24 @@
 ---
 import LayoutLanding from "@/layout/LayoutLanding.astro";
 import { getCV } from "../../services/cv.service";
-import Home from "../../components/Landing/Home.astro";
+import Home from "@/components/Landing/Home.astro";
 import AboutMe from "../../components/Landing/AboutMe.astro";
 import HeaderLanding from "../../layout/HeaderLanding.astro";
+import Porfolio from "@/components/Landing/Porfolio/Porfolio.astro";
+import Skills from "@/components/Landing/Skills/Skills.astro";
+import Education from "@/components/Landing/Education/Education.astro";
+import Contact from "@/components/Landing/Contact.astro";
 
-const data = await getCV("es")
+const data = await getCV("en")
 ---
 <LayoutLanding>
 	<HeaderLanding/>
-    <main class="w-full h-full md:pl-60">
+    <main class="w-full h-full md:pl-60 scroll-smooth">
         <Home basics={data.basics} />
-        <AboutMe sumary={data.basics.summary}/>
+        <AboutMe basics={data.basics}/>
+        <Porfolio porfolio={data.projects} skills={data.skills} />
+        <Education  education={data.education} certificados={data.certificates}/>
+        <Skills skills={data.skills} />
+        <Contact data={data.basics} skills={data.skills} />
     </main>
 </LayoutLanding>

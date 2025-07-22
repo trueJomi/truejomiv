@@ -1,12 +1,61 @@
 ---
-import type { Basics } from "@/types/cv.type";
+import type { Basics, Skills } from "@/types/cv.type";
 import LandingSecction from "../utils/LandingSecction.astro";
+import Title from "../utils/Title.astro";
+import Mail from "@/assets/icons/Mail.astro";
+import Whatsapp from "@/assets/icons/Whatsapp.astro";
+import Linkedin from "@/assets/icons/LinkedIn.astro";
+import SkillTag from "./Porfolio/SkillTag.astro";
+import { formatPhoneNumber } from "@/libs/phone"
+
 interface Props {
     data: Basics
+    skills: Skills[]
 }
+const { data, skills } = Astro.props;
+
+const contruidoCon = [ "html", "javascript", "css", "astro", "typescript" ,"tailwindcss", "firebase"];
 
 ---
 
-<LandingSecction id="contact">
-    contact
+<LandingSecction id="contact" class="flex flex-col justify-center gap-4">
+    <Title>
+        Contactame aqui
+    </Title>
+    <ol class=" space-y-5 text-white font-roboto-mono md:text-xl">
+        <li class="flex items-center gap-2" >
+            <div class="h-6 w-6 md:h-10 md:w-10 text-tertiary" >
+                <Mail/>
+            </div>
+            Email <a class="text-secondary hover:text-tertiary font-black duration-200 hover:underline" href={`mailto:${data.email}`}>{data.email}</a>
+        </li>
+        <li class="flex items-center gap-2">
+            <div class="h-6 w-6 md:h-10 md:w-10 text-tertiary" >
+                <Whatsapp/>
+            </div>
+            Whatsapp <a class="text-secondary hover:text-tertiary font-black duration-200 hover:underline" href={`https://wa.me/${data.phone}`}>
+                {formatPhoneNumber(data.phone)}
+            </a>
+        </li>
+        <li class="flex items-center gap-2">
+            <div class="h-6 w-6 md:h-10 md:w-10 text-tertiary" >
+                <Linkedin/>
+            </div>
+            Linkedin <a class="text-secondary hover:text-tertiary font-black duration-200 hover:underline" href={data.profiles[1].url}>{'in/'+data.profiles[1].username}</a>
+        </li>
+    </ol>
+
+    <h2 class=" text-secondary uppercase font-roboto-mono font-bold text-xl md:text-3xl mt-12" >
+        Esta pagina esta desarrollada con:
+    </h2>
+    <ul class=" flex gap-3 flex-wrap" >
+        {contruidoCon.map((skill) => {
+            const skillData = skills.find((s) => s.icon === skill);
+            if (!skillData) return null;
+            return (
+                <SkillTag skill={skillData} />
+            );
+        })}
+    </ul>
+
 </LandingSecction>

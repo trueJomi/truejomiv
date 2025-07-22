@@ -12,12 +12,12 @@ interface Props {
 const { summary, workingStatus, job, email } = Astro.props.basics;
 ---
 
-<LandingSecction id="about" class="text-white font-hurley flex flex-col justify-center">
+<LandingSecction id="about" class="text-white font-roboto-mono font-medium flex flex-col justify-center">
   <Title>
     {t("about.title")}
   </Title>
   <p class="text-lg sm:text-2xl text-pretty font-mono font-bold">{summary}</p>
-  <p class="text-lg sm:text-3xl text-tertiary py-4">
+  <p class="text-lg sm:text-3xl text-tertiary py-4 font-bold">
     {
       !workingStatus ? (
         t("about.lookingForJob")

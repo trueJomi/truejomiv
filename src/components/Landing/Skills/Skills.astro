@@ -1,0 +1,130 @@
+---
+import type { Skills } from "@/types/cv.type";
+import LandingSecction from "@/components/utils/LandingSecction.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import Title from "@/components/utils/Title.astro";
+import SkillIcon from "./SkillIcon.astro";
+
+interface Props {
+  skills: Skills[];
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const { skills } = Astro.props;
+
+function calsifySkill(skills: Skills[]) {
+  return {
+    frontend: skills.filter((skill) => skill.type === "frontend"),
+    backend: skills.filter((skill) => skill.type === "backend"),
+    frameroks: skills.filter((skill) => skill.type === "framework"),
+    mobile: skills.filter((skill) => skill.type === "mobile"),
+    database: skills.filter((skill) => skill.type === "database"),
+    tecnologies: skills.filter(
+      (skill) =>
+        ["frontend", "backend", "framework", "mobile", "database"].includes(
+          skill.type
+        ) === false
+    ),
+  };
+}
+
+const { frontend, backend, frameroks, mobile, tecnologies, database } =
+  calsifySkill(skills);
+---
+
+<LandingSecction id="skills">
+  <Title >
+    {t("skills.title")}
+  </Title>
+  <div class="grid grid-cols-1 mt-10 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+    <div>
+      <h2 >
+        {t("skills.frontend")}
+      </h2>
+      <ul>
+        {
+          frontend.map((skill) => (
+            <SkillIcon skill={skill}/>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <h2 >
+        {t("skills.backend")}
+      </h2>
+      <ul>
+        {
+          backend.map((skill) => (
+            <SkillIcon skill={skill}/>
+
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <h2 >
+        {t("skills.database")}
+      </h2>
+      <ul>
+        {
+          database.map((skill) => (
+            <SkillIcon skill={skill}/>
+
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <h2 >
+        {t("skills.frameworks")}
+      </h2>
+      <ul>
+        {
+          frameroks.map((skill) => (
+            <SkillIcon skill={skill}/>
+
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <h2 >
+        {t("skills.mobile")}
+      </h2>
+      <ul>
+        {
+          mobile.map((skill) => (
+            <SkillIcon skill={skill}/>
+
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <h2 >
+        {t("skills.tecnologies")}
+      </h2>
+      <ul>
+        {
+          tecnologies.map((skill) => (
+            <SkillIcon skill={skill}/>
+
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</LandingSecction>
+<style>
+  @reference "@/styles/global.css";
+  ul {
+    @apply flex flex-wrap justify-center gap-5;
+  }
+
+  h2 {
+    @apply text-tertiary font-bold text-2xl text-center md:text-3xl mb-5 uppercase;
+  }
+</style>
