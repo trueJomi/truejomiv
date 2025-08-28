@@ -1,14 +1,18 @@
 ---
-import type { Certificates, Education } from "@/types/cv.type";
 import LandingSecction from "@/components/utils/LandingSecction.astro";
 import Title from "@/components/utils/Title.astro";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 import EducationCard from "./EducationCard.astro";
 import CertificatesComponent from "./Certificates.astro";
+import type { Certificate, Education, EducationCourse } from "@prisma/client";
+
+interface ExtendedEducation extends Education {
+  courses: EducationCourse[];
+}
 
 interface Props {
-  education: Education[];
-  certificados: Certificates[];
+  education: ExtendedEducation[];
+  certificados: Certificate[];
 }
 const { education, certificados } = Astro.props;
 const lang = getLangFromUrl(Astro.url);

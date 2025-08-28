@@ -1,10 +1,11 @@
 ---
-import type { Skills } from '@/types/cv.type';
 import {Image} from 'astro:assets';
 import {SKILLS_ICONS} from '@/const/skills';
 import { adaptativeColor } from '@/libs/color';
+import type { Skill } from '@prisma/client';
+
 interface Props {
-    skill: Skills
+    skill: Skill
 }
 const { skill } = Astro.props;
 

@@ -8,16 +8,44 @@ import Porfolio from "@/components/Landing/Porfolio/Porfolio.astro";
 import Skills from "@/components/Landing/Skills/Skills.astro";
 import Education from "@/components/Landing/Education/Education.astro";
 import Contact from "@/components/Landing/Contact.astro";
+import { getLangFromUrl } from "@/i18n/utils";
+import { generateKeywords } from "@/const/seo";
 
-const data = await getCV("es")
+const lang = getLangFromUrl(Astro.url);
+
+const data = await getCV(lang)
+
+if (
+  data.basics === null ||
+  data.basics.location === null
+) {
+    throw new Error("No se encontro el CV")
+}
+
+// SEO específico para la página principal
+const pageTitle = "Jose Miguel Vasquez - Desarrollador Full Stack";
+const pageDescription = `${data.basics.summary || 'Desarrollador Full Stack especializado en tecnologías modernas'} - Portfolio profesional con proyectos, experiencia y habilidades técnicas.`;
+const pageKeywords = generateKeywords([
+  ...data.skills.map(skill => skill.name),
+  'Portfolio',
+  'Proyectos',
+  'Experiencia profesional'
+]);
+
 ---
-<LayoutLanding>
-	<HeaderLanding/>
+<LayoutLanding 
+	title={pageTitle}
+	description={pageDescription}
+	keywords={pageKeywords}
+	image={data.basics.image || '/favicon.svg'}
+	type="profile"
+>
+	<HeaderLanding image={data.basics.image} />
     <main class="w-full h-full md:pl-60 scroll-smooth">
         <Home basics={data.basics} />
         <AboutMe basics={data.basics}/>
         <Porfolio porfolio={data.projects} skills={data.skills} />
-        <Education  education={data.education} certificados={data.certificates} />
+        <Education  education={data.educations} certificados={data.certificates} />
         <Skills skills={data.skills} />
         <Contact data={data.basics} skills={data.skills}/>
     </main>

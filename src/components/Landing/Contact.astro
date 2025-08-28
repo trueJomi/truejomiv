@@ -1,5 +1,4 @@
 ---
-import type { Basics, Skills } from "@/types/cv.type";
 import LandingSecction from "../utils/LandingSecction.astro";
 import Title from "../utils/Title.astro";
 import Mail from "@/assets/icons/Mail.astro";
@@ -7,14 +6,19 @@ import Whatsapp from "@/assets/icons/Whatsapp.astro";
 import Linkedin from "@/assets/icons/LinkedIn.astro";
 import SkillTag from "./Porfolio/SkillTag.astro";
 import { formatPhoneNumber } from "@/libs/phone"
+import type { Basics, Profile, Skill } from "@prisma/client";
+
+interface ExtendBasics extends Basics {
+    profiles: Profile[]
+}
 
 interface Props {
-    data: Basics
-    skills: Skills[]
+    data: ExtendBasics
+    skills: Skill[]
 }
 const { data, skills } = Astro.props;
 
-const contruidoCon = [ "html", "javascript", "css", "astro", "typescript" ,"tailwindcss", "firebase"];
+const contruidoCon = [ "html", "javascript", "css", "astro", "typescript" ,"tailwindcss", "turso"];
 
 ---
 

@@ -1,10 +1,15 @@
 ---
 import GitHub from "@/assets/icons/GitHub.astro";
 import Section from "../utils/Section.astro";
-import type { Projects } from "@/types/cv.type";
+import type { Project, ProjectHighlight } from "@prisma/client";
+
+interface ProjectExtended extends Project {
+  highlights: ProjectHighlight[];
+}
+
 
 interface Props {
-  projects: Projects[];
+  projects: ProjectExtended[];
 }
 
 const { projects } = Astro.props as Props;

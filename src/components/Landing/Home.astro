@@ -6,17 +6,24 @@ import {
 } from "@/i18n/utils";
 import { Image } from "astro:assets";
 import LandingSecction from "../utils/LandingSecction.astro";
-import type { Basics } from "@/types/cv.type";
 import GitHub from "@/assets/icons/GitHub.astro";
 import LinkedIn from "@/assets/icons/LinkedIn.astro";
 import X from "@/assets/icons/X.astro";
+import type { Location,Basics, Profile } from "@prisma/client";
 import type { SocialIcon } from "@/types/SocialIcons.type";
+
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
+interface ExtendedBasics extends Basics {
+  location: Location | null;
+  profiles: Profile[]
+}
+
 interface Props {
-  basics: Basics;
+  basics: ExtendedBasics;
+  
 }
 const { basics }: Props = Astro.props;
 
@@ -28,16 +35,16 @@ const SOCIAL_ICONS: SocialIcon = {
 ---
 
 <LandingSecction
-  class="flex flex-col items-center sm:flex-row justify-center sm:justify-self-auto md:justify-start sm:items-center"
+  class="flex flex-col items-center sm:flex-row justify-center sm:justify-self-auto md:justify-start sm:items-center gap-5"
   id="home"
 >
   <picture class="md:hidden">
     <Image
-      src="/favicon.svg"
+      src={basics.image}
       alt="imagen"
       width={100}
       height={100}
-      class="aspect-square w-full max-w-60"
+      class="aspect-square w-full max-w-60 rounded-md"
     />
   </picture>
   <div class="col-span-2 md:col-span-1">

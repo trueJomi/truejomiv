@@ -1,17 +1,56 @@
 {
-  "name": "truejomiv",
+  "name": "truejomiv-portfolio",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "Portfolio profesional y CV interactivo de Jose Miguel Vasquez - Desarrollador Full Stack",
+  "author": {
+    "name": "Jose Miguel Vasquez",
+    "email": "contacto@truejomiv.com",
+    "url": "https://truejomiv.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/truejomiv/portfolio.git"
+  },
+  "homepage": "https://truejomiv.com",
+  "license": "MIT",
+  "keywords": [
+    "portfolio",
+    "cv",
+    "resume",
+    "astro",
+    "typescript",
+    "tailwindcss",
+    "prisma",
+    "fullstack",
+    "developer",
+    "seo",
+    "responsive",
+    "multilingual"
+  ],
   "scripts": {
     "dev": "astro dev --host",
+    "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "generate": "prisma generate",
+    "db:studio": "prisma studio",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "lint": "astro check",
+    "format": "prettier --write .",
+    "clean": "rm -rf dist .astro node_modules/.cache"
   },
   "dependencies": {
+    "@astrojs/partytown": "^2.1.4",
+    "@astrojs/sitemap": "^3.5.1",
+    "@prisma/adapter-libsql": "^6.14.0",
+    "@prisma/client": "^6.14.0",
     "@tailwindcss/vite": "^4.1.11",
     "astro": "^5.10.1",
     "hotkeypad": "^1.0.2",
+    "prisma": "^6.14.0",
     "tailwindcss": "^4.1.11",
     "typed.js": "^2.1.0"
   }

@@ -1,9 +1,13 @@
 ---
-import type { Work } from "@/types/cv.type"
+import type { Work, WorkHighlight } from "@prisma/client"
 import Section from "../utils/Section.astro"
 
+interface WorkExperience extends Work {
+  highlights: WorkHighlight[]
+}
+
 interface Props {
-  work: Work[]
+  work: WorkExperience[]
 }
 const { work } = Astro.props
 
@@ -33,13 +37,13 @@ const { work } = Astro.props
 
                   <div>
                     <time 
-                      datetime={startDate}
+                      datetime={startDate.toISOString()}
                       data-title={startDate}>
                         {startYear}
                     </time>
                     -
                     <time 
-                      datetime={endDate}
+                      datetime={endDate?.toISOString()}
                       data-title={endDate}>
                         {endYear}
                     </time>

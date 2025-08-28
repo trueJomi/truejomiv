@@ -1,35 +1,53 @@
 ---
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
+import SEO from "@/components/SEO/SEO.astro";
+import { seoConfig } from "@/const/seo";
+
 interface Props {
   class?: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  keywords?: string[];
+  type?: 'website' | 'article' | 'profile';
+  noindex?: boolean;
+  locale?: string;
 }
 
-const { class: className } = Astro.props;
+const { 
+  class: className,
+  title = seoConfig.defaultTitle,
+  description = seoConfig.defaultDescription,
+  image = seoConfig.defaultImage,
+  keywords = seoConfig.defaultKeywords,
+  type = 'website',
+  noindex = false,
+  locale = 'es-PE'
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={locale.split('-')[0]}>
   <head>
     <meta charset="UTF-8" />
-    <title>Portafolio Jose Miguel Vasquez</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preload" as="image" href="/favicon.svg" />
+    
+    <SEO 
+      title={title}
+      description={description}
+      image={image}
+      keywords={keywords}
+      type={type}
+      noindex={noindex}
+      locale={locale}
+      alternateLocales={[
+        ...(locale === 'es-PE' ? [{ locale: "en-US", url: `${seoConfig.siteUrl}/en` }] : []),
+        ...(locale === 'en-US' ? [{ locale: "es-PE", url: seoConfig.siteUrl }] : [])
+      ]}
+    />
 
-    <meta property="og:url" content="https://truejomiv.com" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Jose Miguel Vasquez" />
-    <meta property="og:description" content="" />
-    <meta property="og:image" content="/favicon.svg" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta property="twitter:domain" content="truejomiv.com" />
-    <meta property="twitter:url" content="https://truejomiv.com" />
-    <meta name="twitter:title" content="Jose Miguel Vasquez" />
-    <meta name="twitter:description" content="" />
-    <meta name="twitter:image" content="" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

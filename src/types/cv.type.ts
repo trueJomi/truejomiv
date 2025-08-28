@@ -1,4 +1,6 @@
+
 export interface CV {
+  languaje: string
   basics: Basics
   work: Array<Work>
   volunteer: Array<Volunteer>

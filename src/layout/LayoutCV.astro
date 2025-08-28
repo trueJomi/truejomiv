@@ -1,38 +1,51 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import SEO from "@/components/SEO/SEO.astro";
+import { seoConfig } from "@/const/seo";
+
 interface Props {
   title: string;
   summary: string;
   url: string;
   image: string;
   class?: string;
+  keywords?: string[];
+  author?: string;
 }
 
-const { title, summary, url, image, class: className } = Astro.props;
+const { 
+  title, 
+  summary, 
+  url, 
+  image, 
+  class: className,
+  keywords = [],
+  author = seoConfig.author
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>{title}</title>
-    <meta name="description" content={summary} />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/cv.ico" />
     <link rel="preload" as="image" href={image} />
 
-    <meta property="og:url" content={url} />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={summary} />
-    <meta property="og:image" content="" />
+    <SEO 
+      title={title}
+      description={summary}
+      image={image}
+      url={url}
+      type="profile"
+      keywords={[...keywords, 'CV', 'Curriculum Vitae', 'Resume']}
+      author={author}
+      locale="es-PE"
+      alternateLocales={[
+        { locale: "en-US", url: url.replace('/cv', '/en/cv') }
+      ]}
+    />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta property="twitter:domain" content={url.split("//")[1] ?? ""} />
-    <meta property="twitter:url" content={url} />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={summary} />
-    <meta name="twitter:image" content="" />
     <ClientRouter/>
   </head>
   <body transition:animate="fade" class:list={[className, ""]}>

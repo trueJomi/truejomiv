@@ -7,8 +7,17 @@ import Projects from "../../components/CV/Projects.astro";
 import Skills from "../../components/CV/Skills.astro";
 import LayoutCV from "../../layout/LayoutCV.astro";
 import { getCV } from "../../services/cv.service";
+import { getLangFromUrl } from "@/i18n/utils";
 
-const data = await getCV("en")
+const lang = getLangFromUrl(Astro.url);
+const data = await getCV(lang)
+
+if (
+  data.basics === null ||
+  data.basics.location === null
+) {
+    throw new Error("No se encontro el CV")
+}
 
 ---
 
@@ -29,21 +38,21 @@ const data = await getCV("en")
             email={data.basics.email}
         />
         <About summary={data.basics.summary} />
-        <Experience work={data.work} />
+        <Experience work={data.works} />
         <Projects projects={data.projects} />
         <Skills skills={data.skills} />
     </main>
     <Keyboard profiles={data.basics.profiles} />
 </LayoutCV>
 <style>
-  .main {
+  main {
     padding: 4rem;
     margin: auto;
     width: 100%;
   }
 
   @media (width <= 700px) {
-    .main {
+    main {
       padding: 2rem;
     }
   }

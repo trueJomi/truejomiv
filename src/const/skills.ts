@@ -25,4 +25,5 @@ export const SKILLS_ICONS: Record<string, string>= {
     flutter: "/skills/flutter.svg",
     gemini: "/skills/gemini.svg",
     googleSheets: "/skills/google-sheets.svg",
+    turso: "/skills/turso.svg"
 }

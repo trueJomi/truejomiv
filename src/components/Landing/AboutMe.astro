@@ -1,13 +1,18 @@
 ---
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 import LandingSecction from "../utils/LandingSecction.astro";
-import type { Basics } from "@/types/cv.type";
 import Title from "../utils/Title.astro";
+import type { Basics, Location, Profile } from "@prisma/client";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+interface ExtendedBasics extends Basics {
+  location: Location | null;
+  profiles: Profile[]
+}
 interface Props {
-  basics: Basics;
+  basics: ExtendedBasics;
 }
 const { summary, workingStatus, job, email } = Astro.props.basics;
 ---

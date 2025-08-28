@@ -1,8 +1,9 @@
 ---
-import type { Certificates } from '@/types/cv.type';
+import type { Certificate } from '@prisma/client';
+
 
 interface Props {
-  cretificados: Certificates;
+  cretificados: Certificate;
 }
 
 const { cretificados } = Astro.props;

@@ -1,12 +1,12 @@
 ---
-import type { Skills } from "@/types/cv.type";
 import LandingSecction from "@/components/utils/LandingSecction.astro";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 import Title from "@/components/utils/Title.astro";
 import SkillIcon from "./SkillIcon.astro";
+import type { Skill } from "@prisma/client";
 
 interface Props {
-  skills: Skills[];
+  skills: Skill[];
 }
 
 const lang = getLangFromUrl(Astro.url);
@@ -14,7 +14,7 @@ const t = useTranslations(lang);
 
 const { skills } = Astro.props;
 
-function calsifySkill(skills: Skills[]) {
+function calsifySkill(skills: Skill[]) {
   return {
     frontend: skills.filter((skill) => skill.type === "frontend"),
     backend: skills.filter((skill) => skill.type === "backend"),

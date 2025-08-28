@@ -1,0 +1,241 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model CV {
+  id           Int           @id @default(autoincrement())
+  language     String  //    "en" or "es"
+  basics       Basics?
+  works        Work[]        @relation("cvWorks")
+  volunteers   Volunteer[]   @relation("cvVolunteers")
+  educations   Education[]   @relation("cvEducations")
+  awards       Award[]       @relation("cvAwards")
+  certificates Certificate[] @relation("cvCertificates")
+  publications Publication[] @relation("cvPublications")
+  skills       Skill[]       @relation("cvSkills")
+  languages    Language[]    @relation("cvLanguages")
+  interests    Interest[]    @relation("cvInterests")
+  references   Reference[]   @relation("cvReferences")
+  projects     Project[]     @relation("cvProjects")
+}
+
+model Basics {
+  id         Int      @id @default(autoincrement())
+  cv         CV       @relation(fields: [cvId], references: [id])
+  cvId       Int      @unique
+  name       String
+  label      String
+  image      String
+  shareImage String
+  email      String
+  phone      String
+  workingStatus Boolean
+  job        String?
+  url        String
+  summary    String
+  location   Location?
+  profiles   Profile[]
+}
+
+model Location {
+  id        Int     @id @default(autoincrement())
+  basics    Basics  @relation(fields: [basicsId], references: [id])
+  basicsId  Int     @unique
+  address   String
+  postalCode String
+  city      String
+  countryCode String
+  region    String
+}
+
+model Profile {
+  id        Int    @id @default(autoincrement())
+  basics    Basics @relation(fields: [basicsId], references: [id])
+  basicsId  Int
+  network   String
+  username  String
+  url       String
+}
+
+model Work {
+  id         Int          @id @default(autoincrement())
+  cv         CV           @relation("cvWorks", fields: [cvId], references: [id])
+  cvId       Int
+  name       String
+  position   String
+  url        String
+  startDate  DateTime
+  endDate    DateTime?
+  summary    String
+  highlights WorkHighlight[]
+}
+
+model WorkHighlight {
+  id     Int   @id @default(autoincrement())
+  work   Work  @relation(fields: [workId], references: [id])
+  workId Int
+  text   String
+}
+
+model Volunteer {
+  id         Int               @id @default(autoincrement())
+  cv         CV                @relation("cvVolunteers", fields: [cvId], references: [id])
+  cvId       Int
+  organization String
+  position   String
+  url        String
+  startDate  DateTime
+  endDate    DateTime?
+  summary    String
+  highlights VolunteerHighlight[]
+}
+
+model VolunteerHighlight {
+  id          Int       @id @default(autoincrement())
+  volunteer   Volunteer @relation(fields: [volunteerId], references: [id])
+  volunteerId Int
+  text        String
+}
+
+model Education {
+  id        Int     @id @default(autoincrement())
+  cv        CV      @relation("cvEducations", fields: [cvId], references: [id])
+  cvId      Int
+  institution String
+  url       String
+  area      String
+  studyType String
+  startDate DateTime
+  endDate   DateTime
+  score     String
+  courses   EducationCourse[]
+}
+
+model EducationCourse {
+  id          Int       @id @default(autoincrement())
+  education   Education @relation(fields: [educationId], references: [id])
+  educationId Int
+  name        String
+}
+
+model Award {
+  id      Int      @id @default(autoincrement())
+  cv      CV       @relation("cvAwards", fields: [cvId], references: [id])
+  cvId    Int
+  title   String
+  date    DateTime
+  awarder String
+  summary String
+}
+
+model Certificate {
+  id     Int      @id @default(autoincrement())
+  cv     CV       @relation("cvCertificates", fields: [cvId], references: [id])
+  cvId   Int
+  name   String
+  date   DateTime
+  issuer String
+  url    String
+}
+
+model Publication {
+  id          Int      @id @default(autoincrement())
+  cv          CV       @relation("cvPublications", fields: [cvId], references: [id])
+  cvId        Int
+  name        String
+  publisher   String
+  releaseDate DateTime
+  url         String
+  summary     String
+}
+
+model Skill {
+  id       Int           @id @default(autoincrement())
+  cv       CV            @relation("cvSkills", fields: [cvId], references: [id])
+  cvId     Int
+  name     String
+  icon     String
+  bgColor  String
+  type     String
+  level    String
+  keywords SkillKeyword[]
+}
+
+model SkillKeyword {
+  id      Int   @id @default(autoincrement())
+  skill   Skill @relation(fields: [skillId], references: [id])
+  skillId Int
+  keyword String
+}
+
+model Language {
+  id      Int    @id @default(autoincrement())
+  cv      CV     @relation("cvLanguages", fields: [cvId], references: [id])
+  cvId    Int
+  language String
+  fluency  String
+}
+
+model Interest {
+  id       Int              @id @default(autoincrement())
+  cv       CV               @relation("cvInterests", fields: [cvId], references: [id])
+  cvId     Int
+  name     String
+  keywords InterestKeyword[]
+}
+
+model InterestKeyword {
+  id         Int      @id @default(autoincrement())
+  interest   Interest @relation(fields: [interestId], references: [id])
+  interestId Int
+  keyword    String
+}
+
+model Reference {
+  id        Int    @id @default(autoincrement())
+  cv        CV     @relation("cvReferences", fields: [cvId], references: [id])
+  cvId      Int
+  name      String
+  reference String
+}
+
+model Project {
+  id          Int               @id @default(autoincrement())
+  cv          CV                @relation("cvProjects", fields: [cvId], references: [id])
+  cvId        Int
+  name        String
+  isActive    Boolean
+  public      Boolean
+  description String
+  image       String
+  url         String
+  github      String?
+  highlights  ProjectHighlight[]
+  technologies ProjectTechnology[]
+}
+
+model ProjectHighlight {
+  id        Int     @id @default(autoincrement())
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId Int
+  text      String
+}
+
+model ProjectTechnology {
+  id        Int     @id @default(autoincrement())
+  project   Project @relation(fields: [projectId], references: [id])
+  projectId Int
+  name      String
+}

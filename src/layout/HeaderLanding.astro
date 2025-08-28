@@ -16,6 +16,10 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
+interface Props {
+  image?: string;
+}
+
 const routes: Route[] = [
   {
     name: t("nav.home"),
@@ -42,6 +46,9 @@ const routes: Route[] = [
     path: translatePath("#contact"),
   },
 ];
+
+const { image } = Astro.props;
+
 ---
 
 <button
@@ -49,6 +56,13 @@ const routes: Route[] = [
 >
   <Bars />
 </button>
+<a href={lang === "es" ? "/en" : "/"} class="fixed top-5 left-5 w-10 h-10 z-60" >
+  <button
+    class="text-main-0 hover:text-main font-bold hover:bg-secondary border-main-0 border-2 rounded-xl duration-300 bg-main-400 flex justify-center items-center h-full w-full"
+  >
+    {lang ==="es" ? "EN" : "ES"}
+  </button>
+</a>
 <nav transition:animate="none" class="md:fixed top-0 left-0 z-50">
   <div
     id="nav-menu"
@@ -63,11 +77,11 @@ const routes: Route[] = [
       <li class="mx-auto hidden md:block">
         <picture>
           <Image
-            src="/favicon.svg"
+            src={image ?? "/favicon.svg"}
             alt="imagen"
             width={100}
             height={100}
-            class="h-40 w-40 aspect-square"
+            class="h-40 w-40 aspect-square rounded-md"
           />
         </picture>
       </li>

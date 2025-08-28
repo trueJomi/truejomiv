@@ -18,7 +18,7 @@ import Postgre from "@/assets/icons/Postgre.astro"
 import Section from "../utils/Section.astro"
 import Docker from "@/assets/icons/Docker.astro"
 import GoogleCloud from "@/assets/icons/GoogleCloud.astro"
-import type { Skills } from "@/types/cv.type"
+import type { Skill, SkillKeyword } from "@prisma/client"
 
 const SKILLS_ICONS: Record<string, any> = {
   html: HTML,
@@ -40,9 +40,12 @@ const SKILLS_ICONS: Record<string, any> = {
   docker: Docker,
   googleCloud: GoogleCloud
 }
+interface ExtendedSkills extends Skill {
+  keywords: SkillKeyword[]
+}
 
 interface Props {
-  skills: Skills[]
+  skills: ExtendedSkills[]
 }
 
 const { skills } = Astro.props;

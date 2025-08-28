@@ -1,8 +1,12 @@
 ---
-import type { Education } from '@/types/cv.type';
+import type { Education, EducationCourse } from '@prisma/client';
+
+interface ExtendedEducation extends Education {
+  courses: EducationCourse[];
+}
 
 interface Props {
-  education: Education;
+  education: ExtendedEducation;
 }
 
 const { education } = Astro.props;

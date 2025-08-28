@@ -1,25 +1,33 @@
 ---
-import type { Projects, Skills } from "@/types/cv.type";
 import { Image } from "astro:assets";
 import SkillTag from "./SkillTag.astro";
+import type { Project, ProjectHighlight, ProjectTechnology, Skill } from "@prisma/client";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
-interface Props {
-  data: Projects;
-  skills: Skills[];
+interface ExtendedProject extends Project {
+  technologies: ProjectTechnology[]
+  highlights: ProjectHighlight[]
 }
 
+
+interface Props {
+  data: ExtendedProject;
+  skills: Skill[];
+}
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang)
 const { data, skills }: Props = Astro.props;
 ---
 
 <div
-  class="font-roboto-mono bg-main text-white p-4 rounded-md min-h-120 w-full flex flex-col justify-between gap-2 border-main-50 border-2 max-w-md"
+  class="font-roboto-mono bg-main text-white p-4 rounded-md min-h-120 w-full flex flex-col justify-between gap-2 border-main-50 border-2 max-w-md h-full"
 >
   <div>
     <picture>
       <Image
         src={data.image}
         alt={data.name}
-        class="w-full h-48 object-cover rounded-md mb-4 bg-white"
+        class="w-full h-48 object-cover rounded-md mb-4 bg-white object-center"
         loading="lazy"
         width={400}
         height={300}
@@ -36,8 +44,8 @@ const { data, skills }: Props = Astro.props;
     </p>
     <ul class="flex flex-wrap gap-2 gap-y-1">
       {
-        data.tecnologies.map((tech) => {
-          const skill = skills.find((s) => s.icon === tech);
+        data.technologies.map((tech) => {
+          const skill = skills.find((s) => s.icon === tech.name);
           if (!skill) return null;
           return <SkillTag skill={skill} />;
         })
@@ -48,18 +56,18 @@ const { data, skills }: Props = Astro.props;
     "grid gap-1 text-sm md:text-base",
     data.public ? "grid-cols-2" : "grid-cols-1"
   ]}>
-    <a class="col-span-1" href="">
+    <a class="col-span-1" href={data.url}>
       <button
         class="font-roboto-mono bg-tertiary text-main-200 px-4 py-2 rounded-lg hover:bg-secondary transition-colors w-full border-2 font-bold uppercase"
       >
-        Ver Proyecto
+        {t("projects.card.see")}
       </button>
     </a>
     {
       data.public && (
-        <a class="col-span-1" href="">
+        <a class="col-span-1" href={data.github}>
           <button class="font-roboto-mono bg-main-500 text-white px-4 py-2 rounded-lg w-full hover:bg-main-600 border-2 border-transparent hover:border-main-400 transition-colors font-bold uppercase">
-            Ver Repositorio
+            {t("projects.card.github")}
           </button>
         </a>
       )
