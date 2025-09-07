@@ -77,7 +77,7 @@ const { image } = Astro.props;
       <li class="mx-auto hidden md:block">
         <picture>
           <Image
-            src={image ?? "/favicon.svg"}
+            src={image ?? "/favicon.ico"}
             alt="imagen"
             width={100}
             height={100}
@@ -117,7 +117,7 @@ import { getLangFromUrl } from "@/i18n/utils";
     const sections = document.querySelectorAll("section[id]");
     const lang = getLangFromUrl(new URL(window.location.href));
     let pathadd= "";
-    console.log(lang)
+    
     if (lang !== "es") {
       pathadd = `/${lang}`;
     }

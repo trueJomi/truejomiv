@@ -27,6 +27,7 @@ export const ui = {
     'projects.card.see': 'Ver Proyecto',
     'projects.card.github': 'Ver Repositorio',
     'education.title': 'Educación',
+    'education.card.view': 'Ver Certificado',
     'skills.title': 'Habilidades',
     'skills.frontend': 'Frontend',
     'skills.backend': 'Backend',
@@ -34,6 +35,8 @@ export const ui = {
     'skills.frameworks': 'Frameworks',
     'skills.mobile': 'Móvil',
     'skills.tecnologies': 'Tecnologías',
+    'contact.title': 'Contáctame aquí',
+    'constact.tech.text': 'Esta pagina esta desarrollada con:',
    },
    en: {
     'nav.home': 'Jose Miguel',
@@ -55,12 +58,15 @@ export const ui = {
     'projects.card.see': 'See Project',
     'projects.card.github': 'See Repository',
     'education.title': 'Education',
+    'education.card.view': 'View Certificate',
     'skills.title': 'Skills',
     'skills.frontend': 'Frontend',
     'skills.backend': 'Backend',
     'skills.database': 'Database',
     'skills.frameworks': 'Frameworks',
     'skills.mobile': 'Mobile',
-    'skills.tecnologies': 'Technologies', 
+    'skills.tecnologies': 'Technologies',
+    'contact.title': 'Contact me here',
+    'constact.tech.text': 'This page is developed with:',
    }
 } as const;

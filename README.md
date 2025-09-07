@@ -77,7 +77,7 @@ truejomiv/
 │   ├── dev.db                 # Base de datos SQLite
 │   └── migrations/            # Migraciones
 ├── public/
-│   ├── favicon.svg            # Favicon del sitio
+│   ├── favicon.ico            # Favicon del sitio
 │   ├── cv.ico                 # Icono para CV
 │   ├── robots.txt             # SEO robots
 │   └── skills/                # Iconos de habilidades

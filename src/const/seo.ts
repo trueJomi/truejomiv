@@ -16,7 +16,7 @@ export const seoConfig: SEOConfig = {
   defaultTitle: "Jose Miguel Vasquez - Desarrollador Full Stack",
   defaultDescription: "Desarrollador Full Stack especializado en React, Node.js, TypeScript, Python y tecnologías modernas. Portfolio y CV de Jose Miguel Vasquez.",
   siteUrl: "https://truejomiv.com",
-  defaultImage: "/favicon.svg",
+  defaultImage: "/favicon.ico",
   author: "Jose Miguel Vasquez",
   social: {
     twitter: "@truejomiv",

@@ -7,6 +7,7 @@ import Linkedin from "@/assets/icons/LinkedIn.astro";
 import SkillTag from "./Porfolio/SkillTag.astro";
 import { formatPhoneNumber } from "@/libs/phone"
 import type { Basics, Profile, Skill } from "@prisma/client";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
 interface ExtendBasics extends Basics {
     profiles: Profile[]
@@ -16,6 +17,9 @@ interface Props {
     data: ExtendBasics
     skills: Skill[]
 }
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const { data, skills } = Astro.props;
 
 const contruidoCon = [ "html", "javascript", "css", "astro", "typescript" ,"tailwindcss", "turso"];
@@ -24,7 +28,7 @@ const contruidoCon = [ "html", "javascript", "css", "astro", "typescript" ,"tail
 
 <LandingSecction id="contact" class="flex flex-col justify-center gap-4">
     <Title>
-        Contactame aqui
+        {t('contact.title')}
     </Title>
     <ol class=" space-y-5 text-white font-roboto-mono md:text-xl">
         <li class="flex items-center gap-2" >
@@ -50,7 +54,7 @@ const contruidoCon = [ "html", "javascript", "css", "astro", "typescript" ,"tail
     </ol>
 
     <h2 class=" text-secondary uppercase font-roboto-mono font-bold text-xl md:text-3xl mt-12" >
-        Esta pagina esta desarrollada con:
+        {t('constact.tech.text')}
     </h2>
     <ul class=" flex gap-3 flex-wrap" >
         {contruidoCon.map((skill) => {

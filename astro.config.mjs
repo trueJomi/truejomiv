@@ -6,12 +6,21 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import partytown from '@astrojs/partytown';
 
+import cloudflare from '@astrojs/cloudflare';
+
 // https://astro.build/config
 export default defineConfig({
+  output: 'server',
+  
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    define: {
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+    }
   },
+
   site:'https://truejomiv.com',
+
   integrations: [
     sitemap({
       i18n: {
@@ -30,5 +39,21 @@ export default defineConfig({
         forward: ["dataLayer.push"]
       }
     })
-  ]
+  ],
+
+  adapter: cloudflare({
+    platformProxy: {
+      enabled: true
+    },
+    imageService: 'cloudflare'
+  }),
+
+  // Configuración de i18n
+  i18n: {
+    defaultLocale: 'es',
+    locales: ['es', 'en'],
+    routing: {
+      prefixDefaultLocale: false
+    }
+  }
 });

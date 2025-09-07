@@ -1,4 +1,6 @@
 ---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { formatDateEdu } from '@/libs/dates';
 import type { Education, EducationCourse } from '@prisma/client';
 
 interface ExtendedEducation extends Education {
@@ -9,7 +11,12 @@ interface Props {
   education: ExtendedEducation;
 }
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const { education } = Astro.props;
+
+const coursesNames = education.courses.map(course => course.name).join(", ");
 ---
 
 <div class=" font-bold" >
@@ -24,16 +31,15 @@ const { education } = Astro.props;
 
         </div>
         <p class="text-sm text-secondary">
-            {education.startDate} - {education.endDate}
+            {education.startDate.toLocaleDateString(lang, formatDateEdu)} - {education.endDate.toLocaleDateString(lang, formatDateEdu)}
         </p>
     </div>
     <p class="mt-2 text-white ">
-        {education.courses.join(", ")}
+        {coursesNames}
     </p>
     {education.url && (
         <a href={education.url} target="_blank" class=" mt-5 inline-block bg-secondary text-main-400 px-2 py-1 rounded uppercase font-mono hover:bg-tertiary transition-colors duration-200">
-            Ver
-        certificado
+            {t('education.card.view')}
         </a>
     )}
 </div>

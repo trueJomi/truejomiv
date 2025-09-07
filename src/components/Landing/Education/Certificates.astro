@@ -1,23 +1,29 @@
 ---
 import type { Certificate } from '@prisma/client';
-
+import { formatDateEdu } from '@/libs/dates';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 interface Props {
   cretificados: Certificate;
 }
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const { cretificados } = Astro.props;
+
+
 ---
 <div>
     <h3 class="text-2xl font-bold mb-2 text-tertiary font-roboto-mono">
         {cretificados.name}
     </h3>
     <p class="text-lg font-bold text-white">
-        {cretificados.date} - {cretificados.issuer}
+        {cretificados.date.toLocaleDateString(lang, formatDateEdu)} - {cretificados.issuer}
     </p>
     {cretificados.url && (
         <a href={cretificados.url} class="mt-5 inline-block bg-secondary text-main-400 px-2 py-1 rounded uppercase font-mono hover:bg-tertiary transition-colors duration-200 font-bold">
-            ver certificado
+            {t('education.card.view')}
         </a>
     )}
 </div>

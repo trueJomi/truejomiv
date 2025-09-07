@@ -8,9 +8,16 @@ import Skills from "../components/CV/Skills.astro";
 import LayoutCV from "../layout/LayoutCV.astro";
 import { getCV } from "../services/cv.service";
 import { getLangFromUrl } from "@/i18n/utils";
+import { CACHE_HEADERS } from "@/utils/ssr-config";
 
 const lang = getLangFromUrl(Astro.url);
-const data = await getCV(lang)
+
+// Configurar headers de caché específicos para CV (cache más largo)
+Object.entries(CACHE_HEADERS.CV).forEach(([key, value]) => {
+  Astro.response.headers.set(key, value);
+});
+
+const data = await getCV(lang);
 
 if (
   data.basics === null ||
