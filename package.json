@@ -41,10 +41,14 @@
     "lint": "astro check",
     "format": "prettier --write .",
     "clean": "rm -rf dist .astro node_modules/.cache",
-    "deploy": "pnpm run build && wrangler pages deploy dist",
-    "deploy:preview": "pnpm run build && wrangler pages deploy dist --project-name=truejomiv-portfolio-preview",
     "cf:login": "wrangler auth login",
-    "cf:pages": "wrangler pages project create truejomiv-portfolio"
+    "cf:pages:create": "wrangler pages project create truejomiv-portfolio",
+    "cf:pages:list": "wrangler pages project list",
+    "cf:deploy": "pnpm run build && wrangler pages deploy dist",
+    "cf:deploy:preview": "pnpm run build && wrangler pages deploy dist --project-name=truejomiv-portfolio --env=preview",
+    "cf:deploy:production": "pnpm run build && wrangler pages deploy dist --project-name=truejomiv-portfolio --env=production",
+    "deploy": "pnpm run cf:deploy:production",
+    "deploy:preview": "pnpm run cf:deploy:preview"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.6",

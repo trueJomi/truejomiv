@@ -82,3 +82,11 @@ prisma/*.db
 # Backup files
 *.backup
 *.bak
+
+# Cloudflare specific
+.wrangler/
+wrangler.toml.local
+.dev.vars
+
+# Cloudflare Pages cache
+.pages/
