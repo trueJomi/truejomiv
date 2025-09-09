@@ -44,9 +44,9 @@
     "cf:login": "wrangler auth login",
     "cf:pages:create": "wrangler pages project create truejomiv-portfolio",
     "cf:pages:list": "wrangler pages project list",
-    "cf:deploy": "pnpm run build && wrangler pages deploy dist",
-    "cf:deploy:preview": "pnpm run build && wrangler pages deploy dist --project-name=truejomiv-portfolio --env=preview",
-    "cf:deploy:production": "pnpm run build && wrangler pages deploy dist --project-name=truejomiv-portfolio --env=production",
+    "cf:deploy": "pnpm run build && wrangler pages deploy dist --commit-dirty=true",
+    "cf:deploy:preview": "pnpm run build && wrangler pages deploy dist --project-name=truejomiv-portfolio --branch=preview --commit-dirty=true",
+    "cf:deploy:production": "pnpm run build && wrangler pages deploy dist --project-name=truejomiv-portfolio --branch=main --commit-dirty=true",
     "deploy": "pnpm run cf:deploy:production",
     "deploy:preview": "pnpm run cf:deploy:preview"
   },

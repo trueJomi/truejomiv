@@ -5,20 +5,35 @@ compatibility_flags = ["nodejs_compat"]
 # Configuración para Pages
 pages_build_output_dir = "./dist"
 
-# Variables de entorno
+# Variables de entorno por defecto
+[vars]
+NODE_ENV = "production"
+
+# KV Namespace para sesiones (requerido por Astro Cloudflare)
+[[kv_namespaces]]
+binding = "SESSION"
+id = "6ac98eff6251481ea532fc8803107261"
+preview_id = "ba245076e100408c804282d22a44c118"
+
+# Configuración específica para producción
+[env.production]
+[[env.production.kv_namespaces]]
+binding = "SESSION"
+id = "6ac98eff6251481ea532fc8803107261"
+
 [env.production.vars]
 NODE_ENV = "production"
+
+# Configuración específica para preview
+[env.preview]
+[[env.preview.kv_namespaces]]
+binding = "SESSION"
+id = "ba245076e100408c804282d22a44c118"
 
 [env.preview.vars]
 NODE_ENV = "preview"
 
-# Configuración de KV (si necesitas almacenamiento)
-# [[kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "your-kv-namespace-id"
-# preview_id = "your-preview-kv-namespace-id"
-
-# Configuración de D1 (para base de datos)
+# Configuración de D1 (para base de datos si la necesitas)
 # [[d1_databases]]
 # binding = "DB"
 # database_name = "truejomiv-db"
