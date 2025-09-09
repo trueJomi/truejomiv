@@ -14,14 +14,12 @@ export default defineConfig({
   adapter: cloudflare({
     platformProxy: {
       enabled: true
-    }
+    },
+    imageService: "cloudflare"
   }),
   
   vite: {
     plugins: [tailwindcss()],
-    define: {
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-    }
   },
 
   site:'https://truejomiv.com',
