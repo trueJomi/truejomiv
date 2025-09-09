@@ -1,7 +1,7 @@
 // Utilidades para generar URLs canónicas y gestionar rutas del sitio
 
 export const siteConfig = {
-  baseUrl: 'https://truejomiv.com',
+  baseUrl: 'https://truejomiv-production.truejomiv.workers.dev',
   defaultLocale: 'es',
   locales: ['es', 'en'] as const,
   localeMapping: {
