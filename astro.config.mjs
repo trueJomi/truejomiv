@@ -12,14 +12,17 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   output: 'server',
   adapter: cloudflare({
-    platformProxy: {
-      enabled: true
-    },
-    imageService: "cloudflare"
+    imageService: 'cloudflare'
   }),
   
   vite: {
     plugins: [tailwindcss()],
+    define: {
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+    },
+    ssr: {
+      external: ['@prisma/client']
+    }
   },
 
   site:'https://truejomiv.com',

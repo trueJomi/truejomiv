@@ -1,0 +1,41 @@
+name = "truejomiv-portfolio"
+main = "dist/_worker.js"
+compatibility_date = "2025-09-08"
+compatibility_flags = ["nodejs_compat"]
+
+# Variables de entorno
+[vars]
+NODE_ENV = "production"
+
+# KV Namespaces
+[[kv_namespaces]]
+binding = "SESSION"
+id = "6ac98eff6251481ea532fc8803107261"
+preview_id = "ba245076e100408c804282d22a44c118"
+
+# Configuración de rutas
+[[routes]]
+pattern = "truejomiv.com/*"
+zone_name = "truejomiv.com"
+
+[[routes]]
+pattern = "www.truejomiv.com/*"
+zone_name = "truejomiv.com"
+
+# Configuración para desarrollo local
+[env.preview]
+[[env.preview.kv_namespaces]]
+binding = "SESSION"
+id = "ba245076e100408c804282d22a44c118"
+
+[env.preview.vars]
+NODE_ENV = "preview"
+
+# Configuración para producción
+[env.production]
+[[env.production.kv_namespaces]]
+binding = "SESSION" 
+id = "6ac98eff6251481ea532fc8803107261"
+
+[env.production.vars]
+NODE_ENV = "production"

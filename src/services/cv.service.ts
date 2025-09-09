@@ -1,7 +1,8 @@
-import { prisma } from "@/libs/prisma";
+import { getPrismaClient } from "@/libs/prisma-workers";
 
 export async function getCV(lang: "en" | "es") {
   try {
+    const prisma = getPrismaClient();
     const data = await prisma.cV.findFirst({
       where: {
         language: lang,
