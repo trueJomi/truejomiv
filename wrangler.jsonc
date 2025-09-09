@@ -1,14 +1,7 @@
 {
     "name": "astro-app",
-    "main": "./dist/_worker.js/index.js",
     "compatibility_date": "2025-09-08",
-    "compatibility_flags": [
-        "nodejs_compat"
-    ],
     "assets": {
         "directory": "./dist"
-    },
-    "observability": {
-        "enabled": true
     }
 }
