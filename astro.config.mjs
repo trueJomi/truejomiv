@@ -25,7 +25,7 @@ export default defineConfig({
     }
   },
 
-  site:'https://truejomiv.com',
+  // site:'https://truejomiv.com',
 
   integrations: [
     sitemap({

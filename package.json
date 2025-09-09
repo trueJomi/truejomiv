@@ -47,6 +47,7 @@
     "cf:deploy:production": "pnpm run build && wrangler deploy --env production",
     "cf:dev": "wrangler dev",
     "cf:tail": "wrangler tail",
+    "cf:local": "astro build && wrangler dev",
     "deploy": "pnpm run cf:deploy:production",
     "deploy:preview": "pnpm run cf:deploy:preview"
   },
