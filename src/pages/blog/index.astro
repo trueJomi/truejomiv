@@ -1,11 +1,5 @@
 ---
 import LayoutLanding from "@/layout/LayoutLanding.astro";
-import { CACHE_HEADERS } from "@/utils/ssr-config";
-
-// Configurar headers de caché para blog
-Object.entries(CACHE_HEADERS.DYNAMIC).forEach(([key, value]) => {
-  Astro.response.headers.set(key, value);
-});
 ---
 
 <LayoutLanding

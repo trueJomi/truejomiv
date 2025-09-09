@@ -10,7 +10,7 @@ import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'server',
+  // output: 'server',
   
   vite: {
     plugins: [tailwindcss()],
@@ -40,13 +40,6 @@ export default defineConfig({
       }
     })
   ],
-
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true
-    },
-    imageService: 'cloudflare'
-  }),
 
   // Configuración de i18n
   i18n: {

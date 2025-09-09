@@ -37,6 +37,9 @@ export const ui = {
     'skills.tecnologies': 'Tecnologías',
     'contact.title': 'Contáctame aquí',
     'constact.tech.text': 'Esta pagina esta desarrollada con:',
+    '404.title': '¡Oops! Página no encontrada',
+    '404.message': 'La página que buscas no existe. Puedes volver a la página principal haciendo clic en el botón de abajo.',
+    '404.button': 'Volver al inicio',
    },
    en: {
     'nav.home': 'Jose Miguel',
@@ -68,5 +71,8 @@ export const ui = {
     'skills.tecnologies': 'Technologies',
     'contact.title': 'Contact me here',
     'constact.tech.text': 'This page is developed with:',
+    '404.title': '¡Oops! Page not found',
+    '404.message': 'The page you are looking for does not exist. You can return to the main page by clicking the button below.',
+    '404.button': 'Return to home',
    }
 } as const;
