@@ -1,62 +1,55 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-
-import tailwindcss from '@tailwindcss/vite';
-
-import sitemap from '@astrojs/sitemap';
-import partytown from '@astrojs/partytown';
-
-import cloudflare from '@astrojs/cloudflare';
+import { defineConfig } from "astro/config";
+import tailwindcss from "@tailwindcss/vite";
+import sitemap from "@astrojs/sitemap";
+import cloudflare from "@astrojs/cloudflare";
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'server',
+  output: "server",
   adapter: cloudflare({
     platformProxy: {
-      enabled: true
+      enabled: true,
     },
 
-    imageService: "cloudflare"
+    imageService: "cloudflare",
   }),
-  
+
   vite: {
     plugins: [tailwindcss()],
     define: {
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+      "process.env.NODE_ENV": JSON.stringify(
+        process.env.NODE_ENV || "development"
+      ),
     },
     ssr: {
-      external: ['@prisma/client']
-    }
+      external: ["@prisma/client"],
+    },
   },
 
-  site: 'https://truejomiv-production.truejomiv.workers.dev',
+  site: "https://truejomiv-production.truejomiv.workers.dev",
 
   integrations: [
     sitemap({
       i18n: {
-        defaultLocale: 'es',
+        defaultLocale: "es",
         locales: {
-          es: 'es-PE',
-          en: 'en-US'
-        }
+          es: "es-PE",
+          en: "en-US",
+        },
       },
-      changefreq: 'weekly',
+      changefreq: "weekly",
       priority: 0.7,
       lastmod: new Date(),
     }),
-    partytown({
-      config: {
-        forward: ["dataLayer.push"]
-      }
-    })
   ],
 
   // Configuración de i18n
   i18n: {
-    defaultLocale: 'es',
-    locales: ['es', 'en'],
+    defaultLocale: "es",
+    locales: ["es", "en"],
     routing: {
-      prefixDefaultLocale: false
-    }
-  }
+      prefixDefaultLocale: false,
+    },
+  },
 });
