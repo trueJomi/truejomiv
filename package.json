@@ -40,15 +40,8 @@
     "lint": "astro check",
     "format": "prettier --write .",
     "clean": "rm -rf dist .astro node_modules/.cache",
-    "cf:login": "wrangler auth login",
-    "cf:deploy": "pnpm run build && wrangler deploy",
-    "cf:deploy:preview": "pnpm run build && wrangler deploy --env preview",
-    "cf:deploy:production": "pnpm run build && wrangler deploy --env production",
-    "cf:dev": "wrangler dev",
-    "cf:tail": "wrangler tail",
-    "cf:local": "astro build && wrangler dev",
-    "deploy": "pnpm run cf:deploy:production",
-    "deploy:preview": "pnpm run cf:deploy:preview"
+    "deploy": "astro build && wrangler pages deploy",
+		"cf-typegen": "wrangler types"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.6",
