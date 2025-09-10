@@ -1,7 +1,5 @@
 // Configuración de Prisma para Workers
 import { PrismaClient } from '@prisma/client'
-import { PrismaLibSQL } from '@prisma/adapter-libsql'
-import { createClient } from '@libsql/client'
 
 // Cache del cliente para reutilizar conexiones
 let cachedPrisma: PrismaClient | null = null
@@ -11,32 +9,32 @@ export function getPrismaClient(): PrismaClient {
     return cachedPrisma
   }
 
-  // Configuración para development (SQLite local)
+  // Solo para desarrollo local - SQLite
   if (typeof process !== 'undefined' && process.env.NODE_ENV === 'development') {
+    console.log('[Prisma] Connecting to local SQLite database');
     cachedPrisma = new PrismaClient({
       datasources: {
         db: {
           url: 'file:./prisma/dev.db'
         }
-      }
+      },
+      log: ['error', 'warn']
     })
     return cachedPrisma
   }
 
-  // Configuración para Workers (Turso/LibSQL)
-  const libsql = createClient({
-    url: process.env.DATABASE_URL || 'file:./prisma/dev.db',
-    authToken: process.env.DATABASE_AUTH_TOKEN
-  })
-
-  const adapter = new PrismaLibSQL(libsql)
-  
-  cachedPrisma = new PrismaClient({ 
-    adapter,
-    log: ['error']
-  })
-
-  return cachedPrisma
+  // Para Workers/producción - crear cliente básico
+  // Nota: En Workers reales necesitarías una base de datos compatible como Turso
+  console.log('[Prisma] Creating basic client for Workers environment');
+  try {
+    cachedPrisma = new PrismaClient({
+      log: ['error']
+    })
+    return cachedPrisma
+  } catch (error) {
+    console.error('[Prisma] Error creating client:', error);
+    throw new Error('Database connection failed in Workers environment');
+  }
 }
 
 // Función para cerrar la conexión

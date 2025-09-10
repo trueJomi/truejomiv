@@ -25,6 +25,8 @@ export default defineConfig({
     }
   },
 
+  site: 'https://truejomiv-production.truejomiv.workers.dev',
+
   integrations: [
     sitemap({
       i18n: {
