@@ -40,6 +40,7 @@
     "lint": "astro check",
     "format": "prettier --write .",
     "clean": "rm -rf dist .astro node_modules/.cache",
+    "cf-build": "prisma generate && astro build",
     "deploy": "astro build && wrangler pages deploy",
     "cf-typegen": "wrangler types"
   },
