@@ -51,8 +51,8 @@ const keywordsString = keywords.length > 0 ? keywords.join(', ') :
   'Jose Miguel Vasquez, Desarrollador Full Stack, Programador, React, Node.js, TypeScript, Python, Portfolio';
 
 // Crear URLs absolutas
-const absoluteUrl = new URL(url, 'https://truejomiv-production.truejomiv.workers.dev').href;
-const absoluteImage = image.startsWith('http') ? image : new URL(image, 'https://truejomiv-production.truejomiv.workers.dev').href;
+const absoluteUrl = new URL(url, 'https://truejomi.com').href;
+const absoluteImage = image.startsWith('http') ? image : new URL(image, 'https://truejomi.com').href;
 
 // Generar breadcrumbs si no se proporcionan
 const finalBreadcrumbs = breadcrumbs || generateBreadcrumbs(Astro.url.pathname, locale.split('-')[0] as 'es' | 'en');

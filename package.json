@@ -5,12 +5,12 @@
   "description": "Portfolio profesional y CV interactivo de Jose Miguel Vasquez - Desarrollador Full Stack",
   "author": {
     "name": "Jose Miguel Vasquez",
-    "email": "contacto@truejomiv.com",
-    "url": "https://truejomiv-production.truejomiv.workers.dev"
+    "email": "contacto@truejomi.com",
+    "url": "https://truejomi.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/truejomiv/portfolio.git"
+    "url": "https://github.com/trueJomi/truejomiv"
   },
   "license": "MIT",
   "keywords": [

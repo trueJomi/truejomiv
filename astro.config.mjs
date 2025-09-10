@@ -27,7 +27,7 @@ export default defineConfig({
     },
   },
 
-  site: "https://truejomiv-production.truejomiv.workers.dev",
+  site: "https://truejomi.com",
 
   integrations: [
     sitemap({
