@@ -50,7 +50,7 @@ const { projects } = Astro.props as Props;
                 </header>
                 <footer>
                   {highlights.map((highlight) => {
-                    return <span>{highlight}</span>;
+                    return <span>{highlight.text}</span>;
                   })}
                 </footer>
               </article>
