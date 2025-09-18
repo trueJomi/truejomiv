@@ -5,9 +5,8 @@ import Mail from "@/assets/icons/Mail.astro";
 import Whatsapp from "@/assets/icons/Whatsapp.astro";
 import Linkedin from "@/assets/icons/LinkedIn.astro";
 import SkillTag from "./Porfolio/SkillTag.astro";
-import { formatPhoneNumber } from "@/libs/phone"
 import type { Basics, Profile, Skill } from "@prisma/client";
-import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { getLangFromUrl, useTranslatedPath, useTranslations } from "@/i18n/utils";
 
 interface ExtendBasics extends Basics {
     profiles: Profile[]
@@ -17,9 +16,9 @@ interface Props {
     data: ExtendBasics
     skills: Skill[]
 }
-
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 const { data, skills } = Astro.props;
 
 const contruidoCon = [ "html", "javascript", "css", "astro", "typescript" ,"tailwindcss", "turso"];
@@ -30,31 +29,71 @@ const contruidoCon = [ "html", "javascript", "css", "astro", "typescript" ,"tail
     <Title>
         {t('contact.title')}
     </Title>
-    <ol class=" space-y-5 text-white font-roboto-mono md:text-xl">
-        <li class="flex items-center gap-2" >
-            <div class="h-6 w-6 md:h-10 md:w-10 text-tertiary" >
-                <Mail/>
+    <div class="flex flex-wrap w-full gap-5" >
+        <ul class="space-y-5 text-white font-roboto-mono md:text-xl mx-0 col-span-1 w-full sm:w-auto my-auto" >
+            <li>
+                <a href={`mailto:${data.email}`} class="md:w-40" >
+                    <button class="hover:text-main-400 flex items-center gap-2 border-2 duration-200 md:max-w-40 w-full hover:bg-tertiary border-tertiary py-2 px-4 rounded-md justify-center font-black">
+                        <div class="h-6 min-w-6">
+                            <Mail/>
+                        </div>
+                        Email 
+                    </button>
+                </a>
+            </li>
+            
+    
+            <li>
+                <a class="hover:text-main-400 group font-black duration-200" href={`https://wa.me/${data.phone}`}}>
+                    <button class="flex items-center gap-2 border-2 duration-200 md:max-w-40 w-full group-hover:bg-tertiary border-tertiary py-2 px-4 rounded-md justify-center" >
+                        <div class="h-6 min-w-6" >
+                            <Whatsapp/>
+                        </div>
+                        Whatsapp
+                    </button>
+                </a>
+            </li>
+            <li>
+                <a class="hover:text-main-400 group font-black duration-200" href={data.profiles[1].url}>
+                    <button class="flex items-center gap-2 border-2 duration-200 md:max-w-40 w-full group-hover:bg-tertiary border-tertiary py-2 px-4 rounded-md justify-center" >
+                        <div class="h-6 w-6" >
+                            <Linkedin/>
+                        </div>
+                        Linkedin
+                    </button>
+                </a>
+            </li>
+        </ul>
+        <div class="col-span-2" >
+            <Title class="text-tertiary text-xl sm:!text-2xl !mb-1" >
+                {t("contact.service.title")}
+            </Title>
+            <ol class="list-disc list-inside text-white font-roboto-mono md:text-xl space-y-2" >
+                <li>
+                    {t("contact.service.web")}
+                </li>
+                <li>
+                    {t("contact.service.message")}
+                </li>
+                <li>
+                    {t("contact.service.consulting")}
+                </li>
+                <li>
+                    {t("contact.service.custom")}
+                </li>
+            </ol>
+            <div class="mt-4" >
+                <a href={translatePath('/services')}>
+                    <button class="bg-tertiary border-2 border-tertiary px-4 py-2 rounded-md uppercase font-roboto-mono font-bold" >
+                        {t("contact.service.more")}
+                    </button>
+                </a>
             </div>
-            Email <a class="text-secondary hover:text-tertiary font-black duration-200 hover:underline" href={`mailto:${data.email}`}>{data.email}</a>
-        </li>
-        <li class="flex items-center gap-2">
-            <div class="h-6 w-6 md:h-10 md:w-10 text-tertiary" >
-                <Whatsapp/>
-            </div>
-            Whatsapp <a class="text-secondary hover:text-tertiary font-black duration-200 hover:underline" href={`https://wa.me/${data.phone}`}>
-                {formatPhoneNumber(data.phone)}
-            </a>
-        </li>
-        <li class="flex items-center gap-2">
-            <div class="h-6 w-6 md:h-10 md:w-10 text-tertiary" >
-                <Linkedin/>
-            </div>
-            Linkedin <a class="text-secondary hover:text-tertiary font-black duration-200 hover:underline" href={data.profiles[1].url}>{'in/'+data.profiles[1].username}</a>
-        </li>
-    </ol>
+        </div>
+    </div>
 
     <h2 class=" text-secondary uppercase font-roboto-mono font-bold text-xl md:text-3xl mt-12" >
-        {t('constact.tech.text')}
+        {t('contact.tech.text')}
     </h2>
     <ul class=" flex gap-3 flex-wrap" >
         {contruidoCon.map((skill) => {

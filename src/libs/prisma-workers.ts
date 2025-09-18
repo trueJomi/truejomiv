@@ -11,7 +11,6 @@ export function getPrismaClient(): PrismaClient {
 
   // Solo para desarrollo local - SQLite
   if (typeof process !== 'undefined' && process.env.NODE_ENV === 'development') {
-    console.log('[Prisma] Connecting to local SQLite database');
     cachedPrisma = new PrismaClient({
       datasources: {
         db: {

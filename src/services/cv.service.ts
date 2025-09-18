@@ -6,10 +6,6 @@ import { prisma } from "@/libs/prisma";
 
 export async function getCV(lang: "en" | "es") {
   try {
-
-    // En desarrollo local, usar Prisma
-    console.log(`[CV Service] Using Prisma for language: ${lang}`);
-    // const prisma = getPrismaClient();
     const data = await prisma.cV.findFirst({
       where: {
         language: lang,

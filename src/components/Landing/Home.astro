@@ -64,7 +64,9 @@ const SOCIAL_ICONS: SocialIcon = {
       {t("home.contact")}
       <a
         href={`mailto:${basics.email}`}
-        class="hover:underline text-secondary font-bold hover:text-tertiary duration-200">{basics.email}</a
+        class="hover:underline text-secondary font-bold hover:text-tertiary duration-200">
+          {t("home.contact.button")}
+        </a
       >
     </p>
     <dir class=" sm:flex sm:items-center gap-6" >
@@ -79,7 +81,7 @@ const SOCIAL_ICONS: SocialIcon = {
       <div>
         <ul class="flex justify-center sm:justify-start gap-3 mt-6 sm:mt-0">
           {
-            basics.profiles.map(({ network, url, username }) => {
+            basics.profiles.map(({ network, url }) => {
               const Icon = SOCIAL_ICONS[network]
   
               return (
