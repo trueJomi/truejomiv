@@ -37,6 +37,7 @@
     "db:studio": "prisma studio",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
+    "db:seed": "tsx --env-file .env prisma/seed.ts",
     "lint": "astro check",
     "format": "prettier --write .",
     "clean": "rm -rf dist .astro node_modules/.cache",
@@ -58,6 +59,8 @@
     "typed.js": "^2.1.0"
   },
   "devDependencies": {
+    "dotenv": "^17.4.2",
+    "tsx": "^4.21.0",
     "wrangler": "^4.33.0"
   }
 }

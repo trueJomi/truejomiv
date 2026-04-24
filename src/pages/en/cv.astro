@@ -19,7 +19,6 @@ if (
 ) {
     throw new Error("No se encontro el CV")
 }
-
 ---
 
 <LayoutCV
@@ -38,7 +37,10 @@ if (
             phone={data.basics.phone}
             email={data.basics.email}
         />
-        <About summary={data.basics.summary} />
+        <About
+          summary={data.basics.summary}
+          languages={data.languages}
+        />
         <Experience work={data.works} />
         <Projects projects={data.projects} />
         <Skills skills={data.skills} />

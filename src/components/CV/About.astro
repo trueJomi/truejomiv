@@ -1,11 +1,13 @@
 ---
+import { Languages } from "@/types/cv.type";
 import Section from "../utils/Section.astro"
 
 interface Props {
   summary: string
+  languages: Languages[]
 }
 
-const { summary } = Astro.props;
+const { summary, languages } = Astro.props;
 
 ---
 
@@ -13,4 +15,17 @@ const { summary } = Astro.props;
   <p>
     {summary}
   </p>
+</Section>
+<Section title="Idiomas">
+  <div>
+    {
+      languages.map(({language, fluency}) => {
+        return (
+          <p class="">
+            {language} - {fluency}
+          </p>
+        )
+      })
+    }
+  </div>
 </Section>

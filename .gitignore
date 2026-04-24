@@ -90,3 +90,6 @@ wrangler.toml.local
 
 # Cloudflare Pages cache
 .pages/
+
+prisma/dev.db
+prisma/seed.ts

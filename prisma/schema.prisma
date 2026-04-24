@@ -5,7 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"]
 }
 
@@ -16,7 +16,7 @@ datasource db {
 
 model CV {
   id           Int           @id @default(autoincrement())
-  language     String  //    "en" or "es"
+  language     String //    "en" or "es"
   basics       Basics?
   works        Work[]        @relation("cvWorks")
   volunteers   Volunteer[]   @relation("cvVolunteers")
@@ -32,46 +32,47 @@ model CV {
 }
 
 model Basics {
-  id         Int      @id @default(autoincrement())
-  cv         CV       @relation(fields: [cvId], references: [id])
-  cvId       Int      @unique
-  name       String
-  label      String
-  image      String
-  shareImage String
-  email      String
-  phone      String
+  id            Int       @id @default(autoincrement())
+  cv            CV        @relation(fields: [cvId], references: [id])
+  cvId          Int       @unique
+  name          String
+  label         String
+  image         String
+  real_image    String?
+  shareImage    String
+  email         String
+  phone         String
   workingStatus Boolean
-  job        String?
-  url        String
-  summary    String
-  location   Location?
-  profiles   Profile[]
+  job           String?
+  url           String
+  summary       String
+  location      Location?
+  profiles      Profile[]
 }
 
 model Location {
-  id        Int     @id @default(autoincrement())
-  basics    Basics  @relation(fields: [basicsId], references: [id])
-  basicsId  Int     @unique
-  address   String
-  postalCode String
-  city      String
+  id          Int    @id @default(autoincrement())
+  basics      Basics @relation(fields: [basicsId], references: [id])
+  basicsId    Int    @unique
+  address     String
+  postalCode  String
+  city        String
   countryCode String
-  region    String
+  region      String
 }
 
 model Profile {
-  id        Int    @id @default(autoincrement())
-  basics    Basics @relation(fields: [basicsId], references: [id])
-  basicsId  Int
-  network   String
-  username  String
-  url       String
+  id       Int    @id @default(autoincrement())
+  basics   Basics @relation(fields: [basicsId], references: [id])
+  basicsId Int
+  network  String
+  username String
+  url      String
 }
 
 model Work {
-  id         Int          @id @default(autoincrement())
-  cv         CV           @relation("cvWorks", fields: [cvId], references: [id])
+  id         Int             @id @default(autoincrement())
+  cv         CV              @relation("cvWorks", fields: [cvId], references: [id])
   cvId       Int
   name       String
   position   String
@@ -83,23 +84,23 @@ model Work {
 }
 
 model WorkHighlight {
-  id     Int   @id @default(autoincrement())
-  work   Work  @relation(fields: [workId], references: [id])
+  id     Int    @id @default(autoincrement())
+  work   Work   @relation(fields: [workId], references: [id])
   workId Int
   text   String
 }
 
 model Volunteer {
-  id         Int               @id @default(autoincrement())
-  cv         CV                @relation("cvVolunteers", fields: [cvId], references: [id])
-  cvId       Int
+  id           Int                  @id @default(autoincrement())
+  cv           CV                   @relation("cvVolunteers", fields: [cvId], references: [id])
+  cvId         Int
   organization String
-  position   String
-  url        String
-  startDate  DateTime
-  endDate    DateTime?
-  summary    String
-  highlights VolunteerHighlight[]
+  position     String
+  url          String
+  startDate    DateTime
+  endDate      DateTime?
+  summary      String
+  highlights   VolunteerHighlight[]
 }
 
 model VolunteerHighlight {
@@ -110,17 +111,17 @@ model VolunteerHighlight {
 }
 
 model Education {
-  id        Int     @id @default(autoincrement())
-  cv        CV      @relation("cvEducations", fields: [cvId], references: [id])
-  cvId      Int
+  id          Int               @id @default(autoincrement())
+  cv          CV                @relation("cvEducations", fields: [cvId], references: [id])
+  cvId        Int
   institution String
-  url       String
-  area      String
-  studyType String
-  startDate DateTime
-  endDate   DateTime
-  score     String
-  courses   EducationCourse[]
+  url         String
+  area        String
+  studyType   String
+  startDate   DateTime
+  endDate     DateTime
+  score       String
+  courses     EducationCourse[]
 }
 
 model EducationCourse {
@@ -162,8 +163,8 @@ model Publication {
 }
 
 model Skill {
-  id       Int           @id @default(autoincrement())
-  cv       CV            @relation("cvSkills", fields: [cvId], references: [id])
+  id       Int            @id @default(autoincrement())
+  cv       CV             @relation("cvSkills", fields: [cvId], references: [id])
   cvId     Int
   name     String
   icon     String
@@ -174,23 +175,23 @@ model Skill {
 }
 
 model SkillKeyword {
-  id      Int   @id @default(autoincrement())
-  skill   Skill @relation(fields: [skillId], references: [id])
+  id      Int    @id @default(autoincrement())
+  skill   Skill  @relation(fields: [skillId], references: [id])
   skillId Int
   keyword String
 }
 
 model Language {
-  id      Int    @id @default(autoincrement())
-  cv      CV     @relation("cvLanguages", fields: [cvId], references: [id])
-  cvId    Int
+  id       Int    @id @default(autoincrement())
+  cv       CV     @relation("cvLanguages", fields: [cvId], references: [id])
+  cvId     Int
   language String
   fluency  String
 }
 
 model Interest {
-  id       Int              @id @default(autoincrement())
-  cv       CV               @relation("cvInterests", fields: [cvId], references: [id])
+  id       Int               @id @default(autoincrement())
+  cv       CV                @relation("cvInterests", fields: [cvId], references: [id])
   cvId     Int
   name     String
   keywords InterestKeyword[]
@@ -212,17 +213,17 @@ model Reference {
 }
 
 model Project {
-  id          Int               @id @default(autoincrement())
-  cv          CV                @relation("cvProjects", fields: [cvId], references: [id])
-  cvId        Int
-  name        String
-  isActive    Boolean
-  public      Boolean
-  description String
-  image       String
-  url         String
-  github      String?
-  highlights  ProjectHighlight[]
+  id           Int                 @id @default(autoincrement())
+  cv           CV                  @relation("cvProjects", fields: [cvId], references: [id])
+  cvId         Int
+  name         String
+  isActive     Boolean
+  public       Boolean
+  description  String
+  image        String
+  url          String
+  github       String?
+  highlights   ProjectHighlight[]
   technologies ProjectTechnology[]
 }
 
